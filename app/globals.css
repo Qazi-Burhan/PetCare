@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "../src/index.css";
+
+:root {
+  --brand-forest: #176b5b;
+  --brand-sage: #dcefe8;
+  --brand-coral: #d97745;
+  --surface-warm: #f7f8f5;
+}
+
+html {
+  min-width: 320px;
+}
