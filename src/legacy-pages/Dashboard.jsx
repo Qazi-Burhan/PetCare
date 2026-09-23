@@ -7,7 +7,7 @@ import Card, { CardHeader } from '../components/ui/Card'
 import EmptyState from '../components/ui/EmptyState'
 import PageHeader from '../components/ui/PageHeader'
 import StatCard from '../components/ui/StatCard'
-import { CalendarIcon, PlusIcon, TasksIcon } from '../components/icons/Icons'
+import { CalendarIcon, PlusIcon, SparklesIcon, TasksIcon } from '../components/icons/Icons'
 import { getDateInDays, getTodayString } from '../utils/dateUtils'
 
 export default function Dashboard() {
@@ -214,6 +214,23 @@ export default function Dashboard() {
           </Card>
         </section>
       </div>
+
+      <section className="assistant-spotlight" aria-labelledby="assistant-spotlight-heading">
+        <div className="assistant-spotlight__icon" aria-hidden="true">
+          <SparklesIcon size={22} />
+        </div>
+        <div className="assistant-spotlight__content">
+          <h2 id="assistant-spotlight-heading" className="assistant-spotlight__title">
+            AI Pet Care Assistant
+          </h2>
+          <p className="assistant-spotlight__description">
+            Ask quick questions about pet care, symptoms, routines, and general wellness guidance.
+          </p>
+        </div>
+        <Button to="/assistant" variant="secondary" size="sm" className="assistant-spotlight__cta">
+          Open assistant
+        </Button>
+      </section>
 
       {/* ── Your Pets overview ── */}
       <section className="dashboard__section" aria-labelledby="pets-overview-heading">

@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import AppLayout from '../components/layout/AppLayout'
 import AddPet from '../legacy-pages/AddPet'
+import AssistantChat from '../legacy-pages/AssistantChat'
 import CareTasks from '../legacy-pages/CareTasks'
 import Dashboard from '../legacy-pages/Dashboard'
 import EditPet from '../legacy-pages/EditPet'
@@ -18,6 +19,7 @@ export default function AppRoutes() {
         <Route path="pets/:id" element={<PetDetails />} />
         <Route path="pets/:id/edit" element={<EditPet />} />
         <Route path="tasks" element={<CareTasks />} />
+        <Route path="assistant" element={<AssistantChat />} />
         <Route path="settings" element={<Settings />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Route>

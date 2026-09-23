@@ -5,6 +5,7 @@ import {
   PetsIcon,
   PlusIcon,
   SettingsIcon,
+  SparklesIcon,
   TasksIcon,
   CloseIcon,
 } from '../icons/Icons'
@@ -14,6 +15,7 @@ const navItems = [
   { to: '/pets', label: 'My Pets', icon: PetsIcon },
   { to: '/pets/add', label: 'Add Pet', icon: PlusIcon },
   { to: '/tasks', label: 'Care Tasks', icon: TasksIcon },
+  { to: '/assistant', label: 'AI Assistant', icon: SparklesIcon },
   { to: '/settings', label: 'Settings', icon: SettingsIcon },
 ]
 
