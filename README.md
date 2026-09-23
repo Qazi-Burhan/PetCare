@@ -11,6 +11,22 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## AI Pet Care Assistant
+
+PetCare now includes a streaming AI assistant for general pet-care guidance.
+
+- Client chat UI is hosted inside the existing app and can be opened from the sidebar or dashboard.
+- The assistant uses a server-side `/api/chat` route and streams responses from OpenRouter via the Vercel AI SDK.
+- API keys remain server-only and are loaded from the environment.
+
+### Required environment variable
+
+```bash
+OPENROUTER_API_KEY=your_openrouter_key_here
+```
+
+Add this to a local `.env.local` file before sending messages to the assistant. The configured `openrouter/free` router selects an available free model.
+
 ## Routes
 
 - `/` — Dashboard
@@ -19,6 +35,7 @@ Open [http://localhost:3000](http://localhost:3000).
 - `/pets/[id]` — Pet Details
 - `/pets/[id]/edit` — Edit Pet
 - `/tasks` — Care Tasks
+- `/assistant` — AI Pet Care Assistant
 - `/settings` — Settings
 - `/health` — server-rendered health check
 
@@ -29,8 +46,8 @@ Open [http://localhost:3000](http://localhost:3000).
 - Existing interactive PetCare UI isolated behind `app/client-app.jsx`
 - Tailwind CSS v4 via `@tailwindcss/postcss`
 - Design tokens retained in `src/index.css` and exposed in `app/globals.css`
-- `.env.example` documents the currently safe public metadata variable
-- `.env*` files are ignored; no private credentials are required by this project
+- `.env.example` documents the required AI secret placeholder
+- `.env*` files are ignored; no private credentials are committed to the repository
 
 The `/health` route fetches `https://jsonplaceholder.typicode.com/todos/1` on the server with a five-minute revalidation window. It renders the response and an explicit error state when the endpoint is unavailable.
 
