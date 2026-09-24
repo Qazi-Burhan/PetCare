@@ -49,6 +49,8 @@ Add this to a local `.env.local` file before sending messages to the assistant. 
 - `.env.example` documents the required AI secret placeholder
 - `.env*` files are ignored; no private credentials are committed to the repository
 
+The stack uses Next.js `16.3.5`, React `19.2.8`, the Vercel AI SDK, `@ai-sdk/openai` for OpenRouter compatibility, `react-markdown`, and `remark-gfm`. Existing pet data and CRUD state remain in the React Context/reducer and browser localStorage flow.
+
 The `/health` route fetches `https://jsonplaceholder.typicode.com/todos/1` on the server with a five-minute revalidation window. It renders the response and an explicit error state when the endpoint is unavailable.
 
 The machine-readable health endpoint is `/api/health`. It reports application status and whether the server has an OpenRouter key configured; it never returns the key itself.

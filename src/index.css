@@ -825,6 +825,10 @@ button, input, select, textarea {
 }
 
 .chat-assistant__error {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   margin: 0;
   padding: 0.75rem 0.9rem;
   border-radius: var(--radius-md);
@@ -832,6 +836,22 @@ button, input, select, textarea {
   color: var(--color-danger);
   border: 1px solid rgba(220, 38, 38, 0.2);
   font-size: 0.85rem;
+}
+
+.chat-assistant__retry {
+  flex-shrink: 0;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.chat-assistant__retry:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
 @keyframes pulse-bounce {

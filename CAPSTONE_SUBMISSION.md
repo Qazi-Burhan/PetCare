@@ -16,10 +16,10 @@ The app uses Next.js App Router with the existing React Context, reducer, localS
 ## Verified checks
 
 - `npm run lint`: passed
-- `npm run build`: passed before the latest validation/test additions; rerun before submission
-- `npm test`: added validation tests; run locally before submission
-- `npm run test:coverage`: available; actual coverage is intentionally not claimed here
-- `/api/health`: implemented; production response requires manual verification
+- `npm run build`: passed after the validation, health, and documentation additions
+- `npm test`: 4 tests passed
+- `npm run test:coverage`: 92.31% line coverage, 84.21% branch coverage, 100% function coverage for the tested validation module
+- `/api/health`: locally returned HTTP 200 with a safe configuration boolean
 
 ## Safety and failure behavior
 
@@ -32,7 +32,7 @@ The assistant validates message count and size, rejects empty input, preserves p
 - [x] `.env.example` contains placeholders only
 - [x] Server-side `/api/chat` route exists
 - [x] Server-side `/api/health` route exists
-- [ ] Add `OPENROUTER_API_KEY` in the hosting provider dashboard
+- [ ] Confirm the rotated `OPENROUTER_API_KEY` is set in the hosting provider dashboard
 - [ ] Verify live streaming, stopping, retry/error state, and mobile layout
 - [ ] Run Lighthouse and an accessibility scanner and record actual scores
 
