@@ -571,6 +571,15 @@ button, input, select, textarea {
   gap: 0.75rem;
 }
 
+.chat-assistant__disclaimer {
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-warning);
+  border-radius: var(--radius-sm);
+  background: var(--color-warning-light);
+  color: var(--color-text);
+  font-size: 0.78rem;
+}
+
 .chat-assistant__messages {
   flex: 1;
   min-height: 16rem;

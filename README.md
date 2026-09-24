@@ -51,6 +51,23 @@ Add this to a local `.env.local` file before sending messages to the assistant. 
 
 The `/health` route fetches `https://jsonplaceholder.typicode.com/todos/1` on the server with a five-minute revalidation window. It renders the response and an explicit error state when the endpoint is unavailable.
 
+The machine-readable health endpoint is `/api/health`. It reports application status and whether the server has an OpenRouter key configured; it never returns the key itself.
+
+## Testing and quality checks
+
+```bash
+npm run lint
+npm test
+npm run test:coverage
+npm run build
+```
+
+The included tests cover chat message validation, empty input, oversized input, and conversation limits. Browser-based accessibility, Lighthouse, and live-provider streaming checks require a configured local environment and are not measured by the Node test suite.
+
+## Deployment and rollback
+
+In Vercel, set `OPENROUTER_API_KEY` as an encrypted server environment variable, then deploy the intended branch. Verify `/api/health`, `/assistant`, and a test prompt after deployment. Inspect Vercel deployment logs if the build or API fails. To roll back, redeploy the last known-good commit from the Vercel dashboard or Git history; never commit an API key.
+
 ## Vercel deployment
 
 Import `https://github.com/Qazi-Burhan/PetCare` into Vercel, keep the framework preset as **Next.js**, and use the default build settings. Vercel will create preview deployments for pushes and pull requests once the repository is connected. No deployment credentials are stored in this repository.

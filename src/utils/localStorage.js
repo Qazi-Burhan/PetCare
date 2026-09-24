@@ -1,10 +1,24 @@
 const STORAGE_KEY = 'petcare_app_data'
 
+function isStoredAppData(value) {
+  return Boolean(
+    value &&
+      typeof value === 'object' &&
+      Array.isArray(value.pets) &&
+      Array.isArray(value.careTasks) &&
+      Array.isArray(value.appointments) &&
+      Array.isArray(value.vaccinations) &&
+      value.settings &&
+      typeof value.settings === 'object',
+  )
+}
+
 export function loadFromStorage() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return null
-    return JSON.parse(raw)
+    const parsed = JSON.parse(raw)
+    return isStoredAppData(parsed) ? parsed : null
   } catch {
     return null
   }

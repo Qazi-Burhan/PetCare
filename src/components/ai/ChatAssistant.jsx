@@ -111,6 +111,10 @@ export default function ChatAssistant() {
       </header>
 
       <div className="chat-assistant__container">
+        <p className="chat-assistant__disclaimer" role="note">
+          General educational information only — not a veterinary diagnosis or emergency treatment.
+          Contact a qualified veterinarian for urgent concerns.
+        </p>
         <div className="chat-assistant__messages" ref={scrollAreaRef} onScroll={handleScroll}>
           {messages.length === 0 ? (
             <div className="chat-assistant__empty-state">
