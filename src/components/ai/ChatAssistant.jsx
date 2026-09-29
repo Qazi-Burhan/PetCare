@@ -39,7 +39,7 @@ export default function ChatAssistant() {
   const [showJumpToLatest, setShowJumpToLatest] = useState(false)
   const [input, setInput] = useState('')
 
-  const { messages, sendMessage, status, stop, error } = useChat({
+  const { messages, sendMessage, regenerate, status, stop, error } = useChat({
     api: '/api/chat',
   })
   const isLoading = status === 'submitted' || status === 'streaming'
@@ -111,6 +111,10 @@ export default function ChatAssistant() {
       </header>
 
       <div className="chat-assistant__container">
+        <p className="chat-assistant__disclaimer" role="note">
+          General educational information only — not a veterinary diagnosis or emergency treatment.
+          Contact a qualified veterinarian for urgent concerns.
+        </p>
         <div className="chat-assistant__messages" ref={scrollAreaRef} onScroll={handleScroll}>
           {messages.length === 0 ? (
             <div className="chat-assistant__empty-state">
@@ -212,9 +216,17 @@ export default function ChatAssistant() {
         </form>
 
         {error && (
-          <p className="chat-assistant__error" role="alert">
-            {errorMessage}
-          </p>
+          <div className="chat-assistant__error" role="alert">
+            <span>{errorMessage}</span>
+            <button
+              type="button"
+              className="chat-assistant__retry"
+              onClick={() => regenerate()}
+              disabled={isLoading}
+            >
+              Retry
+            </button>
+          </div>
         )}
       </div>
     </section>

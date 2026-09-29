@@ -1,24 +1,17 @@
 import { createOpenAI } from '@ai-sdk/openai'
 import { convertToModelMessages, streamText } from 'ai'
 import { AI_CONFIG } from '../../../src/lib/ai-config'
-
-function hasText(messages) {
-  return Array.isArray(messages) && messages.some((message) => {
-    if (typeof message?.content === 'string') return message.content.trim().length > 0
-    return (message?.parts || []).some(
-      (part) => part?.type === 'text' && typeof part.text === 'string' && part.text.trim(),
-    )
-  })
-}
+import { validateChatMessages } from '../../../src/lib/chat-validation'
 
 export async function POST(request) {
   try {
     const body = await request.json()
     const incomingMessages = Array.isArray(body?.messages) ? body.messages : []
 
-    if (!hasText(incomingMessages)) {
+    const validation = validateChatMessages(incomingMessages)
+    if (!validation.ok) {
       return Response.json(
-        { error: 'Please enter a message before sending.' },
+        { error: validation.message },
         { status: 400 },
       )
     }
@@ -43,15 +36,25 @@ export async function POST(request) {
       },
     })
 
-    const result = streamText({
-      model: openrouter(AI_CONFIG.model),
-      system: AI_CONFIG.systemPrompt,
-      temperature: AI_CONFIG.temperature,
-      maxTokens: AI_CONFIG.maxTokens,
-      messages: await convertToModelMessages(incomingMessages),
-    })
+    let result
+    try {
+      result = streamText({
+        model: openrouter(AI_CONFIG.model),
+        system: AI_CONFIG.systemPrompt,
+        temperature: AI_CONFIG.temperature,
+        maxTokens: AI_CONFIG.maxTokens,
+        messages: await convertToModelMessages(incomingMessages),
+      })
+    } catch {
+      return Response.json(
+        { error: 'The assistant is temporarily unavailable. Please try again.' },
+        { status: 502 },
+      )
+    }
 
-    return result.toUIMessageStreamResponse()
+    return result.toUIMessageStreamResponse({
+      onError: () => 'The assistant could not complete this response. Please try again.',
+    })
   } catch (error) {
     console.error('AI chat request failed', error)
 
